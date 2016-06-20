@@ -1,9 +1,15 @@
-  #Read in Packages 
-  library(shiny)
-  library(leaflet)
-  library(rgdal)
-  library(magrittr)
-  library(raster)
+#Read in Packages 
+
+if (!require('devtools')) install.packages('devtools')
+devtools::install_github('byzheng/leafletplugins')  
+devtools::install_github('byzheng/leaflet')
+library(leaflet)
+library(leafletplugins)
+library(shiny)
+library(rgdal)
+library(magrittr)
+library(raster)
+ 
   
   #Read in data files 
   source("./readData.R")
@@ -66,6 +72,8 @@
       leaflet() %>%
         ### Street Tiles 
         addTiles(group = "Streets")%>%
+        #addControlFullScreen()%>%
+        
         ### Grey Basemap 
         addTiles(urlTemplate = "http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png", "Default") %>% 
         ### Set Default View to Atlanta 
@@ -159,6 +167,9 @@
                    popup = paste(Faith$place_name, "<br>",
                                  Faith$property_address),
                    group = "Faith Centers", icon = faithIcons)%>%
+        
+        # Search Layer
+        #addSearchMarker('marker', position='topleft', propertyName = 'popup')%>%
         
         ### Layer Toggling 
         addLayersControl(baseGroups = c( "Default", "Streets", "Affordability", "Jobs", "Retail", "Crime" )
