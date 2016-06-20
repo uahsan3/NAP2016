@@ -14,6 +14,30 @@ shopIcon <- makeIcon(
   iconAnchorX = 5, iconAnchorY = 20
 )
 
+ddsIcon <- makeIcon(
+  iconUrl = paste(icon_folder, "DMV.png", sep = "/"),
+  iconWidth = 30, iconHeight = 35,
+  iconAnchorX = 5, iconAnchorY = 20
+)
+
+ssnIcon <- makeIcon(
+  iconUrl = paste(icon_folder, "SSN.png", sep = "/"),
+  iconWidth = 30, iconHeight = 35,
+  iconAnchorX = 5, iconAnchorY = 20
+)
+
+dfacsIcon <- makeIcon(
+  iconUrl = paste(icon_folder, "dfacs.png", sep = "/"),
+  iconWidth = 30, iconHeight = 35,
+  iconAnchorX = 5, iconAnchorY = 20
+)
+
+eslIcon <- makeIcon(
+  iconUrl = paste(icon_folder, "esl.png", sep = "/"),
+  iconWidth = 30, iconHeight = 35,
+  iconAnchorX = 5, iconAnchorY = 20
+)
+
 schoolIcon <- makeIcon(
   iconUrl = ifelse(schools$Grades == "Elementary ", paste(icon_folder, "school-p.png", sep = "/"), 
                    ifelse(schools$Grades == "Middle", paste(icon_folder, "school-m.png", sep = "/"), 

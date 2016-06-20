@@ -29,7 +29,11 @@
             "Transit" = "tran",
             "Schools" = "skl",
             "Supermarkets" = "sup",
-            "Faith Centers" = "faith")
+            "Faith Centers" = "faith",
+            "ESL Resources" = "esl",
+            "DDS Offices" = "dds",
+            "DFACS Offices" = "dfacs",
+            "SSN Offices" = "ssn")
         ),
         selectizeInput(
         'e1', 'Search', choices = Apartments, multiple = TRUE),
@@ -118,6 +122,34 @@
                                  Markets$property_address), 
                    group = "Markets", icon = shopIcon)%>%
         
+        #SSN Offices
+        addMarkers(lat = ~ latitude, lng = ~ longitude, data = SSNs, 
+                   popup = paste(SSNs$place_name, "<br>",
+                                 SSNs$property_address, "<br>",
+                                 SSNs$phone), 
+                   group = "SSNs", icon = ssnIcon)%>%
+        
+        #ESL Resources
+        addMarkers(lat = ~ latitude, lng = ~ longitude, data = ESL, 
+                   popup = paste(ESL$place_name, "<br>",
+                                 ESL$property_address, "<br>",
+                                 ESL$phone), 
+                   group = "ESL", icon = eslIcon)%>%
+        
+        #DDS Offices
+        addMarkers(lat = ~ latitude, lng = ~ longitude, data = DDS, 
+                   popup = paste(DDS$place_name, "<br>",
+                                 DDS$property_address, "<br>",
+                                 DDS$phone), 
+                   group = "DDS", icon = ddsIcon)%>%
+        
+        #DFACS Offices
+        addMarkers(lat = ~ latitude, lng = ~ longitude, data = DFACs, 
+                   popup = paste(DFACs$place_name, "<br>",
+                                 DFACs$property_address, "<br>",
+                                 DFACs$phone), 
+                   group = "DFACS", icon = dfacsIcon)%>%
+        
         
         ### Faith Centers
         addMarkers(lat = ~ latitude, lng = ~ longitude, data = Faith, 
@@ -157,6 +189,22 @@
       if('sup' %in% input$CheckOptions) {
           proxy %>%  showGroup("Markets") } else {
             leafletProxy("mymap") %>% hideGroup("Markets") }
+      
+      if('esl' %in% input$CheckOptions) {
+        proxy %>%  showGroup("ESL") } else {
+          leafletProxy("mymap") %>% hideGroup("ESL") }
+      
+      if('dfacs' %in% input$CheckOptions) {
+        proxy %>%  showGroup("DFACS") } else {
+          leafletProxy("mymap") %>% hideGroup("DFACS") }
+      
+      if('dds' %in% input$CheckOptions) {
+        proxy %>%  showGroup("DDS") } else {
+          leafletProxy("mymap") %>% hideGroup("DDS") }
+      
+      if('ssn' %in% input$CheckOptions) {
+        proxy %>%  showGroup("SSNs") } else {
+          leafletProxy("mymap") %>% hideGroup("SSNs") }
         
         
         if ('faith' %in% input$CheckOptions) {
