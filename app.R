@@ -3,14 +3,14 @@
   library(leaflet)
   library(rgdal)
   library(magrittr)
-  
+  library(raster)
   
   #Read in data files 
   source("./readData.R")
   
   #Set Color Palettes
   #pal1 <- colorNumeric( palette = "GnBu", domain = Aff$Rent)
-  binpal <- colorBin("Blues", Aff$Rent, 6, pretty = TRUE)
+  binpal <- colorBin("Blues", Rent$Rent, 6, pretty = TRUE)
   pal2 <- colorQuantile( palette = "RdPu", domain = Aff$local_job_)
   pal3 <- colorQuantile( palette = "RdPu", domain = Aff$retail_acc)
   pal4 <- colorFactor(rainbow(4), schools$Grades)
@@ -72,8 +72,11 @@
         setView(-84.3851808,33.785859,  zoom = 10)%>%
         
         ### Average Rent Shape Overlay 
-        addPolygons(data = Aff, stroke = FALSE, fillOpacity = 0.5, smoothFactor = 0.5, 
+        addPolygons(data = Rent, stroke = FALSE, fillOpacity = 0.5, smoothFactor = 0.5, 
                     group = "Affordability", color = ~binpal(Rent))%>%
+        ### Crime layer
+        addRasterImage(Crime, colors = "YlOrRd", opacity = 0.5, group = "Crime")%>%
+        
         ### Jobs Layer
         addPolygons(data = Aff, stroke = FALSE, fillOpacity = 0.5, smoothFactor = 0.5,
                     group = "Jobs", color = ~pal2(local_job_))%>%
@@ -158,7 +161,7 @@
                    group = "Faith Centers", icon = faithIcons)%>%
         
         ### Layer Toggling 
-        addLayersControl(baseGroups = c( "Default", "Streets", "Affordability", "Jobs", "Retail" )
+        addLayersControl(baseGroups = c( "Default", "Streets", "Affordability", "Jobs", "Retail", "Crime" )
                          ,options = layersControlOptions(collapsed = FALSE))%>%
         ### Add Legend 
         addLegend("bottomright", pal = binpal, values = Aff$Rent , title = "Average Rent",
