@@ -32,6 +32,12 @@ dfacsIcon <- makeIcon(
   iconAnchorX = 5, iconAnchorY = 20
 )
 
+hospitalIcon <- makeIcon(
+  iconUrl = paste(icon_folder, "hospital-2.png", sep = "/"),
+  iconWidth = 30, iconHeight = 35,
+  iconAnchorX = 5, iconAnchorY = 20
+)
+
 eslIcon <- makeIcon(
   iconUrl = paste(icon_folder, "esl.png", sep = "/"),
   iconWidth = 30, iconHeight = 35,

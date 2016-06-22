@@ -38,26 +38,31 @@ library(raster)
             "Faith Centers" = "faith",
             "ESL Resources" = "esl",
             "DDS Offices" = "dds",
-            "DFACS Offices" = "dfacs",
-            "SSN Offices" = "ssn")
+            "DFCS Offices" = "dfacs",
+            "SSN Offices" = "ssn",
+            "Hospitals" = "hosp")
         ),
-        selectizeInput(
-        'e1', 'Search', choices = Apartments, multiple = TRUE),
+        #selectizeInput(
+        #'e1', 'Search', choices = Apartments, multiple = TRUE),
         h4("Legend", align = "center"), h5("Schools"), 
+        
                    img(src = "school-p1.png", height = 25, width = 25), "Elementary School", br(),
                    img(src = "school-m1.png", height = 25, width = 25), "Middle School", br(),
                    img(src = "school-h1.png", height = 25, width = 25), "High School", br(),
                    img(src = "school-21.png", height = 25, width = 25), "Other Schools", br(),
-                   br(), img(src = "apartment-3.png", height = 25, width = 25), "Apartments", br(),
+                   br(), img(src = "apartment-3.png", height = 35, width = 25), "Apartments", br(),
                    img(src = "shopping_cart.png", height = 25, width = 25), "Supermarkets", br(),
+                  img(src = "SSN.png", height = 25, width = 25), "SSN Offices", br(),
+                  img(src = "esl.png", height = 25, width = 25), "ESL Classes", br(),
+                  img(src = "DMV.png", height = 25, width = 25), "DDS Offices", br(),
+                  img(src = "dfacs.png", height = 25, width = 25), "DFCS Offices", br(),
+                  img(src = "hospital-2.png", height = 25, width = 25), "Hospitals", br(),
                    br(), h5("Places to Worship"),
                    img(src = "cross-2.png", height = 25, width = 25), "Church", br(), 
                    img(src = "mosque.png", height = 25, width = 25), "Mosque", br(),
                    img(src = "synagogue-2.png", height = 25, width = 25), "Synagogue", br(), 
                    img(src = "templehindu.png", height = 25, width = 25), "Hindu Temple", br(),
                    img(src = "prayer.png", height = 25, width = 25), "Other worship places",
-        
-        
                    width = 3), 
       
       
@@ -140,6 +145,14 @@ library(raster)
                                  SSNs$phone), 
                    group = "SSNs", icon = ssnIcon)%>%
         
+        #Hospitals
+        addMarkers(lat = ~ latitude, lng = ~ longitude, data = Hospitals, 
+                   popup = paste(Hospitals$place_name, "<br>",
+                                 Hospitals$property_address, "<br>",
+                                 Hospitals$phone, "<br>",
+                                 Hospitals$opening_hours), 
+                   group = "Hospitals", icon = hospitalIcon)%>%
+        
         #ESL Resources
         addMarkers(lat = ~ latitude, lng = ~ longitude, data = ESL, 
                    popup = paste(ESL$place_name, "<br>",
@@ -198,6 +211,10 @@ library(raster)
       if ('skl' %in% input$CheckOptions) {
         proxy %>%  showGroup("Schools") } else {
           leafletProxy("mymap") %>% hideGroup("Schools") }
+      
+      if ('hosp' %in% input$CheckOptions) {
+        proxy %>%  showGroup("Hospitals") } else {
+          leafletProxy("mymap") %>% hideGroup("Hospitals") }
       
         
       if('sup' %in% input$CheckOptions) {
