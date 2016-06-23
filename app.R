@@ -134,7 +134,7 @@ library(raster)
       
         #Supermarkets
         addMarkers(lat = ~ latitude, lng = ~ longitude, data = Markets, 
-                   popup = paste(Markets$market_name, "<br>",
+                   popup = paste(Markets$place_name, "<br>",
                                  Markets$property_address), 
                    group = "Markets", icon = shopIcon)%>%
         
