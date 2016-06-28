@@ -18,5 +18,9 @@ ESL <- read.csv(paste(data_folder, 'ESL.csv', sep = '/'), header = TRUE, sep = "
 Rent <- readOGR(paste(data_folder), "Filtered_Rent" )
 Hospitals <- read.csv(paste(data_folder, 'Hospitals.csv', sep = '/'), header = TRUE, sep = ",")
 
+To_NAP_Office <- read.csv(paste(data_folder, 'to_NAP_office.csv', sep = '/'), header = TRUE, sep = ",")
+
+Apartments <- merge(x = Apartments, y = To_NAP_Office, by.x="place_id", by.y="origin_place_id")
+
 raster_file <- paste(data_folder, "Crimeclip1.tif", sep = "/")
 Crime <- raster(raster_file)

@@ -102,7 +102,9 @@ library(raster)
                    popup = paste("<a href=", Apartments$website_url,  
                                  "<b>", Apartments$apartment_name, "</b>","</a>", "<br>",
                                  Apartments$phone, "<br>",
-                                 Apartments$property_address), clusterOptions = markerClusterOptions(iconCreateFunction=JS("function (cluster) {    
+                                 Apartments$property_address, "<br>",
+                                 "Approximate Travel Time to NAP office:", Apartments$duration_text
+                            ), clusterOptions = markerClusterOptions(iconCreateFunction=JS("function (cluster) {    
       var childCount = cluster.getChildCount(); 
       var c = ' marker-cluster-';  
                                if (childCount < 100) {  
