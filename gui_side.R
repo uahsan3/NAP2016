@@ -15,9 +15,12 @@ ui <- fluidPage(
           "DDS Offices" = "dds",
           "DFCS Offices" = "dfacs",
           "SSN Offices" = "ssn",
-          "Hospitals" = "hosp"
+          "Hospitals" = "hosp",
+          "Show weighted map" = "combined_map"
         )
       ),#checkboxGroupInput
+      
+      #checkboxInput('combined_map', 'Show weighted map', value = FALSE, width = NULL),
       
       sliderInput("jobs_slider", "Importance of jobs access", 0, 100, 50, step = 1),
       sliderInput("retail_slider", "Importance of retail access", 0, 100, 50, step = 1),
@@ -25,20 +28,23 @@ ui <- fluidPage(
       sliderInput("schools_slider", "Importance of proximity to schools", 0, 100, 50, step = 1),
       sliderInput("supermarkets_slider", "Importance of proximity to supermarkets",0, 100, 50, step = 1),
       
-      h4("Legend", align = "center"), h5("Schools"),
+      h4("Legend", align = "center"), 
+      
+      img(src = "apartment-3.png", height = 25, width = 25), "Apartments", br(),
+      img(src = "shopping_cart.png", height = 25, width = 25), "Supermarkets", br(),
+      img(src = "SSN.png", height = 25, width = 25), "SSN Offices", br(),
+      img(src = "esl.png", height = 25, width = 25), "ESL Classes", br(),
+      img(src = "DMV.png", height = 25, width = 25), "DDS Offices", br(),
+      img(src = "dfacs.png", height = 25, width = 25), "DFCS Offices", br(),
+      img(src = "hospital-2.png", height = 25, width = 25), "Hospitals", br(),
+      
+      br(), h5("Schools"),
       
       img(src = "school-p1.png", height = 25, width = 25), "Elementary School", br(),
       img(src = "school-m1.png", height = 25, width = 25), "Middle School", br(),
       img(src = "school-h1.png", height = 25, width = 25), "High School", br(),
       img(src = "school-21.png", height = 25, width = 25), "Other Schools", br(),
       
-      img(src = "apartment-3.png"), "Apartments", br(),
-      div(style = "display:inline-block", img(src = "shopping_cart.png"), "Supermarkets", style = "float:right"),
-      img(src = "SSN.png", height = 25, width = 25), "SSN Offices", br(),
-      img(src = "esl.png", height = 25, width = 25), "ESL Classes", br(),
-      img(src = "DMV.png", height = 25, width = 25), "DDS Offices", br(),
-      img(src = "dfacs.png", height = 25, width = 25), "DFCS Offices", br(),
-      img(src = "hospital-2.png", height = 25, width = 25), "Hospitals", br(),
       br(), h5("Places to Worship"),
       img(src = "cross-2.png", height = 25, width = 25), "Church", br(),
       img(src = "mosque.png", height = 25, width = 25), "Mosque", br(),

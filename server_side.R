@@ -171,7 +171,7 @@ icon = aptIcon
       #addLegend("bottomleft", pal = pal4, value = Schools$Grades, title= "Schools", opacity = 1)%>%
       addLegend(
         "bottomleft", pal = pal2, value = Aff$local_job_, title = "Neighborhood Percentile", opacity = 1
-      )
+      ) 
     
     })
   
@@ -240,6 +240,8 @@ icon = aptIcon
       leafletProxy("mymap") %>% hideGroup("Faith Centers")
     }
     
+    ####### combined map ############
+    
     # user selected values of sliders 
     J <- input$jobs_slider
     R <- input$retail_slider
@@ -249,7 +251,7 @@ icon = aptIcon
     
     #the raster equation
     Show <- ((J * index$j1) + (R * index$r1) + (E * index$e1) + (S * index$s1) + (M * index$m1))
-
+    
     #creating raster data frame 
     I <- cbind(index$Y, index$X, Show)
     
@@ -258,11 +260,21 @@ icon = aptIcon
     crs(A) <- "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" 
     
     #color pallette 
-    Color = colorBin("YlOrRd", domain = Show, bins = 100)
+    Color = colorBin("YlOrRd", domain = Show, bins = 1000)
     
     #plot
-     leafletProxy("mymap") %>% addTiles("http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png") %>%
-       addRasterImage(A, opacity = 0.5, colors = Color)
+    leafletProxy("mymap") %>% addTiles("http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png") %>%
+      addRasterImage(A, opacity = 0.5, colors = Color, group = "CombinedMap")
+    
+    if ("combined_map" %in% input$CheckOptions)
+    {
+      proxy %>%  showGroup("CombinedMap")
+    }
+    else
+    {
+      leafletProxy("mymap") %>% hideGroup("CombinedMap")
+    }
+    
   })
   ########## observe end
   
