@@ -261,9 +261,8 @@ icon = aptIcon
     Color = colorBin("YlOrRd", domain = Show, bins = 100)
     
     #plot
-#     leafletProxy("mymap") %>% addTiles("http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png") %>%
-#       setView(-84.3851808,33.785859,  zoom = input$mymap_zoom) %>%
-#       addRasterImage(A, opacity = 0.5, colors = Color)
+     leafletProxy("mymap") %>% addTiles("http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png") %>%
+       addRasterImage(A, opacity = 0.5, colors = Color)
   })
   ########## observe end
   

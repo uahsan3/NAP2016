@@ -25,8 +25,6 @@ ui <- fluidPage(
       sliderInput("schools_slider", "Importance of proximity to schools", 0, 100, 50, step = 1),
       sliderInput("supermarkets_slider", "Importance of proximity to supermarkets",0, 100, 50, step = 1),
       
-      navbarMenu("Links", tabPanel(a("Google", href="https://google.com", target="_blank"))),
-      
       h4("Legend", align = "center"), h5("Schools"),
       
       img(src = "school-p1.png", height = 25, width = 25), "Elementary School", br(),
@@ -34,7 +32,7 @@ ui <- fluidPage(
       img(src = "school-h1.png", height = 25, width = 25), "High School", br(),
       img(src = "school-21.png", height = 25, width = 25), "Other Schools", br(),
       
-      div(style = "display:inline-block", img(src = "apartment-3.png"), "Apartments", style = "float:right"),
+      img(src = "apartment-3.png"), "Apartments", br(),
       div(style = "display:inline-block", img(src = "shopping_cart.png"), "Supermarkets", style = "float:right"),
       img(src = "SSN.png", height = 25, width = 25), "SSN Offices", br(),
       img(src = "esl.png", height = 25, width = 25), "ESL Classes", br(),
