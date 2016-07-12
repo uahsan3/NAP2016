@@ -1,16 +1,18 @@
 #Read in Packages 
 
-if (!require('devtools')) install.packages('devtools')
-devtools::install_github('byzheng/leafletplugins')  
-devtools::install_github('byzheng/leaflet')
+#if (!require('devtools')) install.packages('devtools')
+#devtools::install_github('byzheng/leafletplugins')  
+#devtools::install_github('byzheng/leaflet')
 library(leaflet)
 library(leafletplugins)
 library(shiny)
 library(rgdal)
 library(magrittr)
 library(raster)
- 
-  
+
+  # Update Apartments from Google Sheets
+  #source("Adding_Apartments/updateApt.R")
+
   #Read in data files 
   source("./readData.R")
   
@@ -67,7 +69,13 @@ library(raster)
       
       
       mainPanel(
-      leafletOutput("mymap", height = "580", width = "1000"))
+        tabsetPanel(
+          tabPanel("Main Map", leafletOutput("mymap", height = "580", width = "1000")),
+          tabPanel("Update Apartments", 
+                   tags$iframe(style="height:500px; width: 800px",
+                               src="https://dssg-pathways.shinyapps.io/ExperimentingWithForms/")))
+        )
+      
   )
   )
   
@@ -99,7 +107,7 @@ library(raster)
         
         ### Apartment Complexes as Markers 
         addMarkers(lat = ~ latitude, lng = ~ longitude, data = Apartments, 
-                   popup = paste("<a href=", Apartments$website_url,  
+                   popup = paste("<a href=", Apartments$website,  
                                  "<b>", Apartments$apartment_name, "</b>","</a>", "<br>",
                                  Apartments$phone, "<br>",
                                  Apartments$property_address, "<br>",
@@ -131,7 +139,11 @@ library(raster)
                                schools$school_type, "<br>",
                                schools$address, "<br>",
                                schools$phone, "<br>",
-                               "Free and Reduced Lunch (%): ", schools$freeandreducedLunch, "<br>"), 
+                               "Free and Reduced Lunch (%): ", schools$freeandreducedLunch, "<br>",
+                               "<a href=", schools$reviews_url,
+                               "<b>", "School Reviews", "</b>", "</a>", "<br>",
+                               "<a href=", schools$ratings_url,
+                               "<b>", "School Rating by Parents", "</b>", "</a>", "<br>"), 
                  group = "Schools", icon = schoolIcon)%>%
       
         #Supermarkets
