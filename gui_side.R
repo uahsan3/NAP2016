@@ -54,7 +54,7 @@ ui <- fluidPage(
       
   ),#sidebarPanel
   
-  mainPanel(leafletOutput("mymap", height = "580", width = "1000"))#mainPanel
+  mainPanel(leafletOutput("mymap", height = "580", width = "900"), fixed=FALSE)#mainPanel
   
 )#sidebarLayout
 )#ui <- fluidPage
