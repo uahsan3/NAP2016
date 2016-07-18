@@ -54,7 +54,13 @@ ui <- fluidPage(
       
   ),#sidebarPanel
   
-  mainPanel(leafletOutput("mymap", height = "580", width = "900"), fixed=FALSE)#mainPanel
+  mainPanel(
+        tabsetPanel(
+          tabPanel("Main Map", leafletOutput("mymap", height = "580", width = "1000")),
+          tabPanel("Update Apartments", 
+                   tags$iframe(style="height:500px; width: 800px",
+                               src="https://dssg-pathways.shinyapps.io/ExperimentingWithForms/")))
+     )#mainPanel
   
 )#sidebarLayout
 )#ui <- fluidPage
