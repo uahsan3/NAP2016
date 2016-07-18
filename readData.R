@@ -22,10 +22,13 @@ num_apt = dim(sheet_data)[1] # this is the number of entries per column
 #num_col = dim(sheet_data)[2] # this is the number of columns [they remain constant]
 
 # Declare empty data frame
-apartments = data.frame(matrix(vector(), 0, 9,
+apartments <- data.frame(matrix(vector(), 0, 9,
                                dimnames=list(c(), c("apartment_name","latitude","longitude",
                                                     "place_id",	"zipcode", "website",	"property_address",	"map_url",	"phone"))),
                         stringsAsFactors=F)
+row_to_write <- data.frame(matrix(vector(), 0, 9, dimnames=list(c(), c("apartment_name","latitude","longitude",
+                                                    "place_id",	"zipcode", "website",	"property_address",	"map_url",	"phone"))),
+                           stringsAsFactors=F)
 
 if (num_apt > 1) {
   for (i in 2:num_apt){
@@ -41,8 +44,10 @@ if (num_apt > 1) {
     # Append the whole line to the Apartments csv file
     # These are the fields in the CSV: apartment_name,latitude,longitude
     # place_id,	zipcode, website,	property_address,	map_url,	phone
-    row_to_write <- c(sheet_data$name[i], lat, lon, "", "",
-                      sheet_data$website[i], sheet_data$address[i], "", sheet_data$phone[i])
+    row_to_write <- rbind(row_to_write, c(sheet_data$name[i], lat, lon, "", "",
+                      sheet_data$website[i], sheet_data$address[i], "", sheet_data$phone[i]))
+    colnames(row_to_write) <- c("apartment_name","latitude","longitude",
+                                          "place_id",	"zipcode", "website",	"property_address",	"map_url",	"phone")
     
     apartments <- rbind(apartments, row_to_write)
   }
@@ -69,7 +74,7 @@ Hospitals <- read.csv(paste(data_folder, 'Hospitals.csv', sep = '/'), header = T
 
 To_NAP_Office <- read.csv(paste(data_folder, 'to_NAP_office.csv', sep = '/'), header = TRUE, sep = ",")
 
-Apartments <- merge(x = Apartments, y = To_NAP_Office, by.x="place_id", by.y="origin_place_id")
+Apartments <- merge(x = Apartments, y = To_NAP_Office, by.x="place_id", by.y="origin_place_id", all.x=TRUE)
 
 raster_file <- paste(data_folder, "Crimeclip1.tif", sep = "/")
 Crime <- raster(raster_file)
