@@ -36,7 +36,7 @@ TEXT_QUERY = '----PASTE YOUR TEXT QUERY HERE----' # Text query for your places s
 
 if YOUR_API_KEY=='':
     print "Error: API_KEY not given!"
-    print "Please add the Google Place API Key in the code: API_KEY=''!"
+    print "Please add the Google Place API Key in the code: YOUR_API_KEY=''!"
     exit()
 
 # Point to the directory where all data files are

@@ -2,9 +2,6 @@ name: Refugee_Resettlement
 account: dssg-pathways
 server: shinyapps.io
 appId: 107986
-bundleId: 504173
+bundleId: 509277
 url: https://dssg-pathways.shinyapps.io/Refugee_Resettlement/
-when: 1468444233.22268
-asMultiple: FALSE
-asStatic: FALSE
-ignoredFiles: cache/unnamed-chunk-1_70b197c6f884ce5cade99e2256b240fa.RData|cache/unnamed-chunk-1_70b197c6f884ce5cade99e2256b240fa.rdb|cache/unnamed-chunk-1_70b197c6f884ce5cade99e2256b240fa.rdx
+when: 1468941964.71575
