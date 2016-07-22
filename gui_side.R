@@ -16,6 +16,7 @@ ui <- fluidPage(
           "DFCS Offices" = "dfacs",
           "SSN Offices" = "ssn",
           "Hospitals" = "hosp",
+          "Daycare Centers" = "daycare",
           "Show weighted map" = "combined_map"
         )
       ),#checkboxGroupInput
@@ -37,6 +38,7 @@ ui <- fluidPage(
       img(src = "DMV.png", height = 25, width = 25), "DDS Offices", br(),
       img(src = "dfacs.png", height = 25, width = 25), "DFCS Offices", br(),
       img(src = "hospital-2.png", height = 25, width = 25), "Hospitals", br(),
+      img(src = "daycare.png", height = 25, width = 25), "Daycare Centers", br(),
       
       br(), h5("Schools"),
       

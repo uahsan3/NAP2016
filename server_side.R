@@ -38,7 +38,9 @@ server <- function(input, output, session) {
           "<b>", Apartments$apartment_name, "</b>","</a>", "<br>",
           Apartments$phone, "<br>",
           Apartments$property_address, "<br>",
-          "Approximate Travel Time to NAP office:", Apartments$duration_text
+          "Approximate Travel Time to NAP office: ", Apartments$duration_text, "<br>",
+          "Travel time to nearest school: ", Times$School_Time, "<br>",
+          "Travel time to nearest supermarket: ", Times$Market_Time
         ), clusterOptions = markerClusterOptions(
           iconCreateFunction = JS(
             "function (cluster) {
@@ -97,6 +99,17 @@ icon = aptIcon
           SSNs$phone
         ),
         group = "SSNs", icon = ssnIcon
+      ) %>%
+      
+      #Daycare Centers
+      addMarkers(
+        lat = ~ latitude, lng = ~ longitude, data = SSNs,
+        popup = paste(
+          Daycares$place_name, "<br>",
+          Daycares$property_address, "<br>",
+          Daycares$phone
+        ),
+        group = "Daycares", icon = daycareIcon
       ) %>%
       
       #Hospitals
@@ -238,6 +251,12 @@ icon = aptIcon
       proxy %>%  showGroup("Faith Centers")
     } else {
       leafletProxy("mymap") %>% hideGroup("Faith Centers")
+    }
+    
+    if ('daycare' %in% input$CheckOptions) {
+      proxy %>%  showGroup("Daycares")
+    } else {
+      leafletProxy("mymap") %>% hideGroup("Daycares")
     }
     
     ####### combined map ############

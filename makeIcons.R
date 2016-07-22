@@ -44,6 +44,12 @@ eslIcon <- makeIcon(
   iconAnchorX = 5, iconAnchorY = 20
 )
 
+daycareIcon <- makeIcon(
+  iconUrl = paste(icon_folder, "daycare.png", sep = "/"),
+  iconWidth = 30, iconHeight = 35,
+  iconAnchorX = 5, iconAnchorY = 20
+)
+
 schoolIcon <- makeIcon(
   iconUrl = ifelse(
     schools$Grades == "Elementary ", paste(icon_folder, "school-p.png", sep = "/"),

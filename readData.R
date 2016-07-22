@@ -25,10 +25,10 @@ num_apt = dim(sheet_data)[1] # this is the number of entries per column
 apartments <- data.frame(matrix(vector(), 0, 9,
                                dimnames=list(c(), c("apartment_name","latitude","longitude",
                                                     "place_id",	"zipcode", "website",	"property_address",	"map_url",	"phone"))),
-                        stringsAsFactors=F)
+                        stringsAsFactors=FALSE)
 row_to_write <- data.frame(matrix(vector(), 0, 9, dimnames=list(c(), c("apartment_name","latitude","longitude",
                                                     "place_id",	"zipcode", "website",	"property_address",	"map_url",	"phone"))),
-                           stringsAsFactors=F)
+                           stringsAsFactors=FALSE)
 
 if (num_apt > 1) {
   for (i in 2:num_apt){
@@ -45,19 +45,20 @@ if (num_apt > 1) {
     # These are the fields in the CSV: apartment_name,latitude,longitude
     # place_id,	zipcode, website,	property_address,	map_url,	phone
     row_to_write <- rbind(row_to_write, c(sheet_data$name[i], lat, lon, "", "",
-                      sheet_data$website[i], sheet_data$address[i], "", sheet_data$phone[i]))
-    colnames(row_to_write) <- c("apartment_name","latitude","longitude",
-                                          "place_id",	"zipcode", "website",	"property_address",	"map_url",	"phone")
+                      sheet_data$website[i], sheet_data$address[i], "", sheet_data$phone[i]), 
+                      stringsAsFactors=FALSE)
+    colnames(row_to_write) <- c("apartment_name","latitude","longitude", "place_id",	
+                                "zipcode", "website",	"property_address",	"map_url",	"phone")
     
     apartments <- rbind(apartments, row_to_write)
   }
   to_write <- unique(apartments)
-  Apartments_initial <- read.csv(paste(data_folder, 'apartment_complexes.csv', sep='/'), header = TRUE, sep = "," )
+  Apartments_initial <- read.csv(paste(data_folder, 'apartment_complexes.csv', sep='/'), header = TRUE, sep = ",", stringsAsFactors=FALSE)
   # Concatenate the new additions and existing apartments - and extract unique rows from there
   Apartments_tmp <- rbind(Apartments_initial,to_write)
   Apartments <- unique(Apartments_tmp)
 } else {
-  Apartments <- read.csv(paste(data_folder, 'apartment_complexes.csv', sep='/'), header = TRUE, sep = ',')
+  Apartments <- read.csv(paste(data_folder, 'apartment_complexes.csv', sep='/'), header = TRUE, sep = ',', stringsAsFactors=FALSE)
 }
 
 schools <- read.csv( paste(data_folder, 'Schools.csv', sep='/'), header = TRUE, sep = "," )
@@ -71,9 +72,9 @@ DFACs <- read.csv(paste(data_folder, 'DFACS.csv', sep = '/'), header = TRUE, sep
 ESL <- read.csv(paste(data_folder, 'ESL.csv', sep = '/'), header = TRUE, sep = ",")
 Rent <- readOGR(paste(data_folder), "Filtered_Rent" )
 Hospitals <- read.csv(paste(data_folder, 'primary_care_locations.csv', sep = '/'), header = TRUE, sep = ",")
-
+Daycares <- read.csv(paste(data_folder, 'day_care_centers.csv', sep = '/'), header = TRUE, sep = ",")
 To_NAP_Office <- read.csv(paste(data_folder, 'to_NAP_office.csv', sep = '/'), header = TRUE, sep = ",")
-
+Times <- read.csv(paste(data_folder, 'Times.csv', sep = '/'), header = TRUE, sep = ",")
 Apartments <- merge(x = Apartments, y = To_NAP_Office, by.x="place_id", by.y="origin_place_id", all.x=TRUE)
 
 raster_file <- paste(data_folder, "Crimeclip1.tif", sep = "/")
