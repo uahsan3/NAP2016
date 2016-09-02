@@ -7,5 +7,7 @@ resettlement agencies to select the best possible locations for affordable apart
 
 The data folder contains all our data files. 
 Docs folder contains the documentation and the main file that executes the web tool is app.R. 
+get_google_places.py and get_schools.py are the python scripts used to get places and schools details. 
+
 
 
